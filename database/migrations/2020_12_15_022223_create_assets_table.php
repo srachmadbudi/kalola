@@ -18,6 +18,7 @@ class CreateAssetsTable extends Migration
             $table->string('jenis');
             $table->integer('harga');
             $table->string('keterangan');
+            $table->unsignedBigInteger('business_id');
             $table->timestamps();
         });
     }
