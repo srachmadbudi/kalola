@@ -14,7 +14,11 @@ class CreateBusinessesTable extends Migration
     public function up()
     {
         Schema::create('businesses', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->integer('district_id');
+            $table->string('phone_number');
+            $table->string('email');
             $table->timestamps();
         });
     }

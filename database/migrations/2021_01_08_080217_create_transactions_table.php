@@ -14,7 +14,11 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->double('total');
+            $table->dateTime('date');
+            $table->bigInteger('business_id');
+            $table->bigInteger('supplier_id');
             $table->timestamps();
         });
     }

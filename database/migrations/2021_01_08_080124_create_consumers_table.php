@@ -14,7 +14,12 @@ class CreateConsumersTable extends Migration
     public function up()
     {
         Schema::create('consumers', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('address');
+            $table->string('district_id');
+            $table->string('phone_number');
+            $table->string('business_id');
             $table->timestamps();
         });
     }
