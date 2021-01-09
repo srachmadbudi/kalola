@@ -14,10 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::get('/transaksi', 'TransactionController@index')->name('transaction');
+
+Route::group(['prefix' => 'transactions', 'namespace' => 'Business'], function() {
+    Route::get('/', 'TransactionController@index')->name('transaction.list');
+    Route::get('/{id}', 'TransactionController@show')->name('transaction.show');
+    Route::get('/add', 'TransactionController@create')->name('transaction.add');
+    Route::post('/add', 'TransactionController@store')->name('transaction.post_add');
+    Route::get('/edit/{id}', 'TransactionController@edit')->name('transaction.edit');
+    Route::post('/edit/{id}', 'TransactionController@update')->name('transaction.post_edit');
+    Route::post('/delete/{id}', 'TransactionController@destroy')->name('transaction.delete');
+});

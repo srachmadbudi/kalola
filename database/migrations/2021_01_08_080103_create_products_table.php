@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('stock');
             $table->double('price');
+            $table->bigInteger('business_id');
+            $table->boolean('active')->default(true);
             $table->bigInteger('product_category_id');
             $table->timestamps();
         });

@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('status')->default(0);
+            // 0 terbuat, 1 terbayar, 2 terkirim, 3 diterima
             $table->double('total');
             $table->string('shipping_provider');
             $table->bigInteger('business_id');
