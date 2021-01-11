@@ -22,7 +22,7 @@
                             <form action="{{ route('product.update', $product->id) }}" method="post">
                                 @csrf
                                 @method('PUT')
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="product_category_id">Kategori</label>
                                     <select name="product_category_id" class="form-control">
                                         <option value="">Pilih</option>
@@ -31,6 +31,11 @@
                                         @endforeach
                                     </select>
                                     <p class="text-danger">{{ $errors->first('category_id') }}</p>
+                                </div> -->
+                                <div class="form-group">
+                                    <label for="name">Kategori Produk</label>
+                                    <input type="text" name="product_category_id" class="form-control" value="{{ $product->product_category_id }}" disabled>
+                                    <p class="text-danger">{{ $errors->first('product_category_id') }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Nama Produk</label>

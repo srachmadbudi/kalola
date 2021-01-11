@@ -46,19 +46,16 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'business_id' => 'required',
             'name' => 'required|string|max:50' . $id,
             'stock' => 'required|integer',
             'price' => 'required|integer',
-            'product_category_id' => 'required|exists:product_categories,id'
         ]);
 
         $product = Product::find($id);
         $product->update([
             'name' => $request->name,
             'stock' => $request->stock,
-            'price' => $request->price,
-            'product_category_id' => $request->product_category_id
+            'price' => $request->price
         ]);
         return redirect(route('product.index'))->with(['success' => 'Data Produk Diperbaharui!']);
     }
@@ -67,6 +64,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect(route('product.index'))->with(['success' => 'ProdukSudah Dihapus!']);
+        return redirect(route('product.index'))->with(['success' => 'Produk Sudah Dihapus!']);
     }
 }

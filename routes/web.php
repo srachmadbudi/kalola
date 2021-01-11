@@ -42,3 +42,4 @@ Route::group(['prefix' => 'transactions', 'namespace' => 'Business'], function()
 Route::resource('category', 'ProductCategoryController')->except(['create', 'show']);
 Route::resource('product', 'ProductController')->except(['show']);
 Route::resource('pegawai', 'PegawaiController')->except(['create', 'show']);
+Route::resource('supplier', 'SupplierController')->except(['create', 'show']);

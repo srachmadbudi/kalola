@@ -34,7 +34,6 @@ class ProductCategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'business_id' => 'required',
             'name' => 'required|string|max:50' . $id
         ]);
 

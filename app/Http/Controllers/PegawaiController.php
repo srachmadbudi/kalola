@@ -37,7 +37,6 @@ class PegawaiController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'business_id' => 'required',
             'role_id' => 'required',
             'username' => 'required',
             'password' => 'required',
