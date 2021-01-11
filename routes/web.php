@@ -30,3 +30,15 @@ Route::group(['prefix' => 'transactions', 'namespace' => 'Business'], function()
     Route::post('/edit/{id}', 'TransactionController@update')->name('transaction.post_edit');
     Route::post('/delete/{id}', 'TransactionController@destroy')->name('transaction.delete');
 });
+
+// Route::group(['prefix' => 'category', 'namespace' => 'Business'], function() {
+//     Route::get('/', 'ProductCategoryController@index')->name('category.list');
+//     Route::post('/add', 'ProductCategoryController@store')->name('category.store');
+//     Route::get('/edit/{id}', 'ProductCategoryController@edit')->name('category.edit');
+//     Route::post('/edit/{id}', 'ProductCategoryController@update')->name('category.post_edit');
+//     Route::post('/delete/{id}', 'ProductCategoryController@destroy')->name('category.delete');
+// });
+
+Route::resource('category', 'ProductCategoryController')->except(['create', 'show']);
+Route::resource('product', 'ProductController')->except(['show']);
+Route::resource('pegawai', 'PegawaiController')->except(['create', 'show']);
