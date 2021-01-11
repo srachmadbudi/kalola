@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('shipping_provider');
             $table->bigInteger('business_id');
             $table->bigInteger('consumer_id');
+            $table->bigInteger('employee_id')->nullable();
             $table->timestamps();
         });
     }

@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Seeded DISTRICTS.');
 
         $this->call(UserSeeder::class);
+        $this->call(MasterDataSeeder::class);
+        $this->call(TransactionSeeder::class);
     }
 
     protected function truncate($table)

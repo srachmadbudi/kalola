@@ -5,7 +5,7 @@
                 <i class="nav-icon icon-speedometer"></i> Dashboard
             </a>
         </li>
-        @if ( Auth::user()->user_type_id == 0 )
+        @if ( Auth::user()->role_id == 1 )
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="nav-icon fa fa-user-circle-o"></i> Admin
@@ -18,56 +18,72 @@
         </li>
         @endif
 
-        @if ( Auth::user()->user_type_id == 1 )
+        @if ( Auth::user()->role_id == 2 )
         <li class="nav-title">OWNER {{ Auth::user()->business->name ?? '' }}</li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('category.index') }}">
-                <i class="nav-icon icon-drop"></i> Kategori
+            <a class="nav-link" href="#">
+                <i class="nav-icon icon-drop"></i> Kategori Produk
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('product.index') }}">
+            <a class="nav-link" href="#">
                 <i class="nav-icon icon-drop"></i> Produk
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('orders.index') }}">
+            <a class="nav-link" href="#">
                 <i class="nav-icon icon-basket-loaded"></i> Pesanan
             </a>
         </li>
-        <li class="nav-title">Laporan</li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('report.product_statistic') }}">
-                <i class="nav-icon icon-puzzle"></i> Statistik Produk
+            <a class="nav-link" href="{{ route('transaction.list') }}">
+                <i class="nav-icon icon-basket-loaded"></i> Transaksi
+            </a>
+        </li>
+        
+        <li class="nav-title">Master Data</li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="nav-icon icon-puzzle"></i> Aset
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('report.finance') }}">
-                <i class="nav-icon icon-puzzle"></i> Keuangan
+            <a class="nav-link" href="#">
+                <i class="nav-icon icon-puzzle"></i> Modal
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="nav-icon icon-puzzle"></i> Hutang
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="nav-icon icon-puzzle"></i> Supplier
             </a>
         </li>
         @endif
 
-        @if ( Auth::user()->user_type_id == 2 )
+        @if ( Auth::user()->role_id == 3 )
         <li class="nav-title">EMPLOYEE {{ Auth::user()->business->name ?? '' }}</li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('category.index') }}">
+            <a class="nav-link" href="#">
                 <i class="nav-icon icon-drop"></i> Kategori
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('product.index') }}">
+            <a class="nav-link" href="#">
                 <i class="nav-icon icon-drop"></i> Produk
             </a>
         </li>
         <li class="nav-title">Pesanan</li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('orders.orders_pending') }}">
+            <a class="nav-link" href="#">
                 <i class="nav-icon icon-basket-loaded"></i> Pending
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('orders.orders_done') }}">
+            <a class="nav-link" href="#">
                 <i class="nav-icon icon-basket-loaded"></i> Selesai
             </a>
         </li>

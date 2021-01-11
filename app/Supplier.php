@@ -12,4 +12,9 @@ class Supplier extends Model
     {
         return $this->belongsTo(Business::class, 'business_id');
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'supplier_id');
+    }
 }

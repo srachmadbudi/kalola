@@ -17,6 +17,8 @@ class CreateAssetsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('business_id');
             $table->string('type');
+            $table->double('nominal');
+            $table->integer('quantity')->default(1);
             $table->text('description');
             $table->timestamps();
         });

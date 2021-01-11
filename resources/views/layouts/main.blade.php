@@ -9,13 +9,14 @@
     
     @yield('title')
 
-	<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/select2-bootstrap4.css') }}">
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+	<link type="text/css" href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/select2.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/select2.js') }}"></script>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -39,12 +40,13 @@
     </footer>
     
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/pace.min.js') }}"></script>
     <script src="{{ asset('js/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('js/coreui.min.js') }}"></script>
     <script src="{{ asset('js/custom-tooltips.min.js') }}"></script>
-    
+    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
     @yield('js')
 </body>
 </html>
