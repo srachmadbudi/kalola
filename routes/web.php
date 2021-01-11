@@ -21,14 +21,7 @@ Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
-Route::group(['prefix' => 'transactions', 'namespace' => 'Business'], function() {
-    Route::get('/', 'TransactionController@index')->name('transaction.list');
-    Route::get('/{id}', 'TransactionController@show')->name('transaction.show');
-    Route::post('/add', 'TransactionController@store')->name('transaction.store');
-    Route::get('/edit/{id}', 'TransactionController@edit')->name('transaction.edit');
-    Route::post('/edit/{id}', 'TransactionController@update')->name('transaction.update');
-    Route::delete('/delete/{id}', 'TransactionController@destroy')->name('transaction.destroy');
-});
+Route::resource('transaction', 'Business\TransactionController');
 
 Route::group(['prefix' => 'employees', 'namespace' => 'Business'], function() {
     Route::get('/', 'EmployeeController@index')->name('employee.list');
@@ -39,3 +32,17 @@ Route::group(['prefix' => 'employees', 'namespace' => 'Business'], function() {
     Route::post('/edit/{id}', 'EmployeeController@update')->name('employee.update');
     Route::post('/delete/{id}', 'EmployeeController@destroy')->name('employee.destroy');
 });
+
+// Route::group(['prefix' => 'category', 'namespace' => 'Business'], function() {
+//     Route::get('/', 'ProductCategoryController@index')->name('category.list');
+//     Route::post('/add', 'ProductCategoryController@store')->name('category.store');
+//     Route::get('/edit/{id}', 'ProductCategoryController@edit')->name('category.edit');
+//     Route::post('/edit/{id}', 'ProductCategoryController@update')->name('category.post_edit');
+//     Route::post('/delete/{id}', 'ProductCategoryController@destroy')->name('category.delete');
+// });
+
+Route::resource('category', 'ProductCategoryController')->except(['create', 'show']);
+Route::resource('product', 'ProductController')->except(['show']);
+Route::resource('pegawai', 'PegawaiController')->except(['create', 'show']);
+Route::resource('supplier', 'SupplierController')->except(['create', 'show']);
+

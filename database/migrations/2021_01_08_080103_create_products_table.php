@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('stock');
-            $table->double('price');
+            $table->integer('price');
             $table->bigInteger('business_id');
             $table->boolean('active')->default(true);
             $table->bigInteger('product_category_id');
