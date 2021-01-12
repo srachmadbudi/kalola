@@ -57,9 +57,9 @@
                                 <div class="form-group">
                                     <label for="">Kecamatan</label>
                                     <select class="form-control" name="district_id" id="district_id" required>
-                                        @foreach ($districts as $row)
-                                        <option value="{{ $row->id }}" {{ $cust->district->id == $row->id ? 'selected':'' }}>{{ $row->name }}</option>
-                                        @endforeach
+                                    @foreach ($cities as $row)
+                                                <option value="{{ $row->id }}" {{ $cust->district->city->id == $row->id ? 'selected':'' }}>{{ $row->name }}</option>
+                                                @endforeach
                                     </select>
                                     <p class="text-danger">{{ $errors->first('district_id') }}</p>
                                 </div>

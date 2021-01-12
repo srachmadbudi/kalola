@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-</main
+</main>
 
 @section('js')
 <script type="text/javascript">

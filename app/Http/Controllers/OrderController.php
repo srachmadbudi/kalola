@@ -29,9 +29,11 @@ class OrderController extends Controller
     public function index()
     {
         if(Auth::user()->role_id != 1){
-            $business = Business::with(['orders.details.district.city.province'])->where('id', Auth::user()->business_id)->first();
+            $business = Business::where('id', Auth::user()->business_id)->first();
 
-            return view('business.owner.order-list', compact('business'));
+            $orders = Order::with(['details', 'district.city.province'])->where('business_id', $business->id)->get();
+
+            return view('business.owner.order-list', compact('business', 'orders'));
         }
     }
 
@@ -43,11 +45,13 @@ class OrderController extends Controller
     public function create()
     {
         if(Auth::user()->role_id != 1){
-            $business = Business::with(['consumers'])->where('id', Auth::user()->business_id)->first();
+            $business = Business::where('id', Auth::user()->business_id)->first();
+
+            $products = Product::with(['category'])->where('business_id', $business->id)->get();
 
             $provinces = Province::get();
 
-            return view('business.owner.order-add', compact('business', 'provinces'));
+            return view('business.owner.order-add', compact('products', 'provinces'));
         }
     }
 
@@ -63,18 +67,34 @@ class OrderController extends Controller
             $business = Business::where('id', Auth::user()->business_id);
         
             $this->validate($request, [
+                'date' => 'required|date',
+                'total' => 'required',
                 'name' => 'required|string',
                 'address' => 'required|string',
                 'district_id' => 'required|exists:districts,id',
-                'phone_number' => 'required|string'
+                'phone_number' => 'required|string',
+                'status' => 'required|boolean',
+                'shipping_provider' => 'required|string',
+                'items' => 'required'
             ]);
-
+            
             $cust = Consumer::create([
                 'name' => $request->name,
                 'address' => $request->address,
                 'district_id' => $request->district_id,
                 'phone_number' => $request->phone_number,
                 'business_id' => $business->id
+            ]);
+
+            $order = Order::create([
+                'status' => $request->status,
+                'total' => $request->total,
+                'date' => $request->date,
+                'shipping_provider' => $request->date,
+                'items' => $request->items,
+                'business_id' => Auth::user()->business_id,
+                'consumer_id' => $customer->id,
+                'employee_id' => Auth::user()->id
             ]);
 
             return redirect(route('order.index'))->with(['success' => 'Pesanan baru berhasil ditambahkan.']);
@@ -92,9 +112,9 @@ class OrderController extends Controller
         if(Auth::user()->role_id != 1) {
             $business = Business::where('id', Auth::user()->business_id);
             $cust = Consumer::where('id', $id)->first();
-            $orders = Order::with(['details.product.category'])->where('consumer_id', $id)->get();
+            $order = Order::with(['consumer', 'details.product.category'])->where('id', $id)->first();
 
-            return view('business.owner.order-show', compact('cust', 'orders'));
+            return view('business.owner.order-show', compact('cust', 'order'));
         }
     }
 
@@ -108,13 +128,13 @@ class OrderController extends Controller
     {
         if(Auth::user()->role_id != 1) {
             $business = Business::where('id', Auth::user()->business_id);
-            $cust = Consumer::with(['district.city.province'])->where('id', $id)->first();
+            $order = Order::with(['details', 'consumer.district.city.province'])->where('id', $id)->first();
             $provinces = Province::get();
             $cities = City::get();
             $districts = District::get();
             
 
-            return view('business.owner.order-edit', compact('cust', 'provinces', 'cities', 'districts'));
+            return view('business.owner.order-edit', compact('order', 'provinces', 'cities', 'districts'));
         }
     }
 
