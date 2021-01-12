@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Business;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\ProductCategory;
+use App\Business;
 
 class ProductCategoryController extends Controller
 {
@@ -12,6 +14,9 @@ class ProductCategoryController extends Controller
     {
         $category = ProductCategory::orderBy('created_at', 'DESC')->paginate(10);
         return view('business.owner.category', compact('category'));
+        // $business = Business::with(['category'])->where('id', Auth::user()->business_id)->first();
+        // $category = ProductCategory::where('business_id', $business->first()->id)->get();
+        // return view('business.owner.category', compact('category', 'business'));
     }
 
     public function store(Request $request)

@@ -2,83 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Asset;
+use App\Business;
 
 class AssetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $asset = Asset::orderBy('created_at', 'DESC')->paginate(10);
+        return view('business.owner.asset', compact('asset'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'tipe' => 'required|string|max:50',
+            'quantity' => 'required',
+            'nominal' => 'required',
+            'business_id' => 'required',
+            'description' => 'required'
+        ]);
+
+        Asset::create($request->except('_token'));
+        return redirect(route('asset.index'))->with(['success' => 'Asset Baru Ditambahkan!']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $asset = Asset::find($id);
+        return view('business.owner.assetEdit', compact('asset'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'quantity' => 'required',
+            'nominal' => 'required',
+            'description' => 'required',
+            'tipe' => 'required|string|max:50' . $id
+        ]);
+
+        $asset = Asset::find($id);
+        $asset->update([
+            'tipe' => $request->tipe,
+            'quantity' => $request->quantity,
+            'nominal' => $request->nominal,
+            'description' => $request->description
+        ]);
+        return redirect(route('asset.index'))->with(['success' => 'Data Asset Diperbaharui!']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $asset = Asset::find($id);
+        $asset->delete();
+        return redirect(route('asset.index'))->with(['success' => 'Asset Sudah Dihapus!']);
     }
 }

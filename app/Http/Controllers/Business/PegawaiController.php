@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Business;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
+use App\Business;
 
 class PegawaiController extends Controller
 {
@@ -31,13 +33,12 @@ class PegawaiController extends Controller
     public function edit($id)
     {
         $pegawai = User::find($id);
-        return view('business.owner.categoryEdit', compact('pegawai'));
+        return view('business.owner.pegawaiEdit', compact('pegawai'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'role_id' => 'required',
             'username' => 'required',
             'password' => 'required',
             'name' => 'required|string|max:50' . $id

@@ -2,83 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Debt;
+use App\Business;
 
 class DebtController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $debt = Debt::orderBy('created_at', 'DESC')->paginate(10);
+        return view('business.owner.debt', compact('debt'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'to' => 'required|string|max:50',
+            'due' => 'required',
+            'nominal' => 'required',
+            'business_id' => 'required',
+            'description' => 'required'
+        ]);
+
+        Debt::create($request->except('_token'));
+        return redirect(route('debt.index'))->with(['success' => 'Hutang Baru Ditambahkan!']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $debt = Debt::find($id);
+        return view('business.owner.debtEdit', compact('debt'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'due' => 'required',
+            'nominal' => 'required',
+            'description' => 'required',
+            'to' => 'required|string|max:50' . $id
+        ]);
+
+        $debt = Debt::find($id);
+        $debt->update([
+            'to' => $request->to,
+            'due' => $request->due,
+            'nominal' => $request->nominal,
+            'description' => $request->description
+        ]);
+        return redirect(route('debt.index'))->with(['success' => 'Data Hutang Diperbaharui!']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $debt = Debt::find($id);
+        $debt->delete();
+        return redirect(route('debt.index'))->with(['success' => 'Hutang Sudah Dihapus!']);
     }
 }

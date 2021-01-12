@@ -18,7 +18,7 @@ class CreateDebtsTable extends Migration
             $table->bigInteger('business_id');
             $table->string('to');
             $table->date('due');
-            $table->double('nominal');
+            $table->integer('nominal');
             $table->text('description');
             $table->timestamps();
         });

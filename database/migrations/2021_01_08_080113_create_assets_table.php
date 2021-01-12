@@ -16,8 +16,8 @@ class CreateAssetsTable extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('business_id');
-            $table->string('type');
-            $table->double('nominal');
+            $table->string('tipe');
+            $table->integer('nominal');
             $table->integer('quantity')->default(1);
             $table->text('description');
             $table->timestamps();

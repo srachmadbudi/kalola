@@ -8,12 +8,7 @@
         @if ( Auth::user()->role_id == 1 )
         <li class="nav-item">
             <a class="nav-link" href="#">
-                <i class="nav-icon fa fa-user-circle-o"></i> Admin
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="nav-icon icon-home"></i> Manajemen UMKM
+                <i class="nav-icon fa fa-user-circle-o"></i> UMKM
             </a>
         </li>
         @endif
@@ -44,6 +39,18 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('transaction.index') }}">
                 <i class="nav-icon icon-basket-loaded"></i> Transaksi
+            </a>
+        </li>
+
+        <li class="nav-title">Resource</li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('pegawai.index') }}">
+                <i class="nav-icon icon-user"></i> Pegawai
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="nav-icon icon-user"></i> Pelanggan
             </a>
         </li>
         

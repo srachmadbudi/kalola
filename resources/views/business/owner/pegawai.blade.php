@@ -59,14 +59,6 @@
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
 
-                            <form action="{{ route('pegawai.index') }}" method="get">
-                                <div class="input-group mb-3 col-md-3 float-right">
-                                    <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button">Cari</button>
-                                    </div>
-                                </div>
-                            </form>
                             <div class="table-responsive">
                                 <table class="table table-hover table-bordered text-center">
                                     <thead>
