@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $guarded = [];
+    protected $casts = ['date' => 'datetime:Y-m-d'];
 
     public function district()
     {

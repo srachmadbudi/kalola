@@ -8,15 +8,15 @@
 <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('transaction.list') }}">Daftar Transaksi</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('transaction.index') }}">Daftar Transaksi</a></li>
         <li class="breadcrumb-item active">Edit Transaksi</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
             <div class="col-md-6">
                 <div>
-                    <a href="{{ route('transaction.list') }}">
-                        <button class="btn btn-default mb-3"><i class="fa fa-chevron-circle-left"></i> Kembali</button>
+                    <a href="{{ route('transaction.index') }}">
+                        <button class="btn btn-info mb-3"><i class="fa fa-chevron-circle-left"></i> Kembali</button>
                     </a>
                 </div>
                 <div class="card">

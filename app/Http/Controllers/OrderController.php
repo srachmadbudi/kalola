@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Business;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
@@ -16,7 +15,7 @@ use App\City;
 use App\District;
 use App\Province;
 
-class CustomerController extends Controller
+class OrderController extends Controller
 {
     public function __construct()
     {
@@ -30,13 +29,9 @@ class CustomerController extends Controller
     public function index()
     {
         if(Auth::user()->role_id != 1){
-            $business = Business::with(['consumers.district.city.province'])->where('id', Auth::user()->business_id)->first();
+            $business = Business::with(['orders.details.district.city.province'])->where('id', Auth::user()->business_id)->first();
 
-            if (request()->q != '') {
-                $business = $business->consumers->where('name', 'LIKE', '%' . request()->q . '%');
-            }
-    
-            return view('business.owner.customer-list', compact('business'));
+            return view('business.owner.order-list', compact('business'));
         }
     }
 
@@ -52,7 +47,7 @@ class CustomerController extends Controller
 
             $provinces = Province::get();
 
-            return view('business.owner.customer-add', compact('business', 'provinces'));
+            return view('business.owner.order-add', compact('business', 'provinces'));
         }
     }
 
@@ -82,7 +77,7 @@ class CustomerController extends Controller
                 'business_id' => $business->id
             ]);
 
-            return redirect(route('customer.index'))->with(['success' => 'Pelanggan baru berhasil ditambahkan.']);
+            return redirect(route('order.index'))->with(['success' => 'Pesanan baru berhasil ditambahkan.']);
         }
     }
 
@@ -99,7 +94,7 @@ class CustomerController extends Controller
             $cust = Consumer::where('id', $id)->first();
             $orders = Order::with(['details.product.category'])->where('consumer_id', $id)->get();
 
-            return view('business.owner.customer-show', compact('cust', 'orders'));
+            return view('business.owner.order-show', compact('cust', 'orders'));
         }
     }
 
@@ -119,7 +114,7 @@ class CustomerController extends Controller
             $districts = District::get();
             
 
-            return view('business.owner.customer-edit', compact('cust', 'provinces', 'cities', 'districts'));
+            return view('business.owner.order-edit', compact('cust', 'provinces', 'cities', 'districts'));
         }
     }
 
@@ -150,7 +145,7 @@ class CustomerController extends Controller
                 'business_id' => $business->id
             ]);
 
-            return redirect(route('customer.index'))->with(['success' => 'Data pelanggan berhasil diperbarui.']);
+            return redirect(route('order.index'))->with(['success' => 'Data pesanan berhasil diperbarui.']);
         }
     }
 
@@ -165,19 +160,7 @@ class CustomerController extends Controller
         if (Auth::user()->role_id != 1) {
             $cust = Consumer::find($id);
             $cust->delete();
-            return redirect(route('customer.index'))->with(['success' => 'Pelanggan berhasil dihapus!']);
+            return redirect(route('order.index'))->with(['success' => 'Pesanan berhasil dihapus!']);
         }
-    }
-
-    public function getCity()
-    {
-        $cities = City::where('province_id', request()->province_id)->get();
-        return response()->json(['status' => 'success', 'data' => $cities]);
-    }
-
-    public function getDistrict()
-    {
-        $districts = District::where('city_id', request()->city_id)->get();
-        return response()->json(['status' => 'success', 'data' => $districts]);
     }
 }

@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(MasterDataSeeder::class);
         $this->call(TransactionSeeder::class);
+        $this->call(ProductSeeder::class);
     }
 
     protected function truncate($table)

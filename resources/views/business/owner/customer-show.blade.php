@@ -1,22 +1,22 @@
 @extends('layouts.main')
 
 @section('title')
-<title>Detail Transaksi</title>
+<title>Detail Pelanggan</title>
 @endsection
 
 @section('content')
 <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('transaction.index') }}">Daftar Transaksi</a></li>
-        <li class="breadcrumb-item active">Detail Transaksi</li>
+        <li class="breadcrumb-item"><a href="{{ route('customer.index') }}">Daftar Pelanggan</a></li>
+        <li class="breadcrumb-item active">Detail Pelanggan</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-md-6">
                     <div>
-                        <a href="{{ route('transaction.index') }}">
+                        <a href="{{ route('customer.index') }}">
                             <button class="btn btn-info mb-3"><i class="fa fa-chevron-circle-left"></i> Kembali</button>
                         </a>
                     </div>
@@ -26,31 +26,27 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Detail Transaksi</h4>
+                            <h4 class="card-title">Detail Pelanggan</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>ID Transaksi</th>
-                                            <td>{{ $trx->id }}</td>
+                                            <th>ID Pelanggan</th>
+                                            <td>{{ $cust->id }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Supplier</th>
-                                            <td>{{ $trx->supplier->name }}</td>
+                                            <th>Nama</th>
+                                            <td>{{ $cust->name }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Total Pembelian</th>
-                                            <td>{{ $trx->total }}</td>
+                                            <th>Alamat</th>
+                                            <td>{{ $cust->address }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Tanggal Pembelian</th>
-                                            <td>{{ $trx->date }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Keterangan</th>
-                                            <td>{{ $trx->description }}</td>
+                                            <th>Nomor Telepon</th>
+                                            <td>{{ $cust->phone_number }}</td>
                                         </tr>
                                     </thead>
                                 </table>
@@ -61,31 +57,36 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Item yang Dibeli</h4>
+                            <h4 class="card-title">Riwayat Pesanan</h4>
                         </div>
                         <div class="card-body">
+                            @foreach($orders as $o)
+                            <h5>{{ $o->date->format('d-m-Y') ?? '' }}</h5>
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Nama Barang</th>
+                                            <th>Nama Produk</th>
+                                            <th>Kategori Produk</th>
                                             <th>Harga Satuan</th>
                                             <th>Kuantitas</th>
                                             <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($trx->details as $row)
+                                        @foreach($o->details as $row)
                                         <tr>
-                                            <td>{{ $row->item_name }}</td>
-                                            <td>Rp {{ number_format($row->price) }}</td>
+                                            <td>{{ $row->product->name }}</td>
+                                            <td>{{ $row->product->category->name }}</td>
+                                            <td>Rp {{ number_format($row->product->price) }}</td>
                                             <td>{{ $row->quantity }}</td>
-                                            <td>Rp {{ number_format($row->price * $row->quantity) }}</td>
+                                            <td>Rp {{ number_format($row->product->price * $row->quantity) }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -96,7 +97,6 @@
 @endsection
 
 @section('js')
-<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 <script>
     $(function(){
         $(".datepicker").datepicker({
@@ -109,18 +109,6 @@
     $('select').select2({
         theme: 'bootstrap4'
     });
-
-    const compress = new Compress()
-    const upload = document.getElementById('image')
-
-    upload.addEventListener('change', (e) => {
-        const files = [...e.target.files]
-        compress.compress(files, {
-            quality: 0.5
-        }).then((images) => {
-            console.log(images)
-        })
-    })
 
 </script>
 @endsection

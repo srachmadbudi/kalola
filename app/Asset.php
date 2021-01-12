@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asset extends Model
 {
-    protected $guided = [];
+    protected $guarded = [];
 
     public function business()
     {

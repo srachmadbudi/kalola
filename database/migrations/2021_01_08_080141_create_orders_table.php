@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('status')->default(0);
             // 0 terbuat, 1 terbayar, 2 terkirim, 3 diterima
             $table->double('total');
+            $table->date('date');
             $table->string('shipping_provider');
             $table->bigInteger('business_id');
             $table->bigInteger('consumer_id');

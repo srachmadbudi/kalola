@@ -66,10 +66,17 @@ class TransactionSeeder extends Seeder
         Order::create([
             'status' => 0,
             'total' => 546000.00,
+            'date' => ('2021-1-2'),
             'shipping_provider' => 'JNT',
             'business_id' => 1,
             'consumer_id' => 1,
             'employee_id' => 1
+        ]);
+
+        OrderDetail::create([
+            'quantity' => 2,
+            'product_id' => 1,
+            'order_id' => 1
         ]);
     }
 }
