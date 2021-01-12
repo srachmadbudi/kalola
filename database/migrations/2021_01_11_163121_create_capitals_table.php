@@ -17,7 +17,7 @@ class CreateCapitalsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('business_id');
             $table->string('source');
-            $table->double('nominal');
+            $table->integer('nominal');
             $table->text('description');
             $table->timestamps();
         });

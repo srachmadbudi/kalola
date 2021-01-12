@@ -47,3 +47,4 @@ Route::resource('pegawai', 'PegawaiController')->except(['create', 'show']);
 Route::resource('supplier', 'SupplierController')->except(['create', 'show']);
 Route::resource('debt', 'DebtController')->except(['create', 'show']);
 Route::resource('asset', 'AssetController')->except(['create', 'show']);
+Route::resource('modal', 'ModalController')->except(['create', 'show']);
