@@ -11,7 +11,7 @@
 					</div>
 					<div class="card fat">
 						<div class="card-body">
-							<h4 class="card-title text-center">LUXME.UP</h4>
+							<h4 class="card-title text-center">KALOLA</h4>
 							<form method="POST" action="{{ route('login') }}" class="my-login-validation">
                                 @csrf
 								<div class="form-group">
