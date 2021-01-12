@@ -45,4 +45,5 @@ Route::resource('category', 'ProductCategoryController')->except(['create', 'sho
 Route::resource('product', 'ProductController')->except(['show']);
 Route::resource('pegawai', 'PegawaiController')->except(['create', 'show']);
 Route::resource('supplier', 'SupplierController')->except(['create', 'show']);
-
+Route::resource('debt', 'DebtController')->except(['create', 'show']);
+Route::resource('asset', 'AssetController')->except(['create', 'show']);

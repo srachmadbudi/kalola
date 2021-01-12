@@ -75,7 +75,7 @@ class TransactionController extends Controller
                 'supplier_id' => $request->supplier_id
             ]);
 
-            return redirect(route('transaction.list'))->with(['success' => 'Transaksi baru berhasil ditambahkan.']);
+            return redirect(route('transaction.index'))->with(['success' => 'Transaksi baru berhasil ditambahkan.']);
         }
         
     }
@@ -143,7 +143,7 @@ class TransactionController extends Controller
                 'supplier_id' => $request->supplier_id
             ]);
 
-            return redirect(route('transaction.list'))->with(['success' => 'Transaksi berhasil diperbarui.']);
+            return redirect(route('transaction.index'))->with(['success' => 'Transaksi berhasil diperbarui.']);
         }
     }
 
@@ -158,7 +158,7 @@ class TransactionController extends Controller
         if (Auth::user()->role_id == 2) {
             $trx = Transaction::find($id);
             $trx->delete();
-            return redirect(route('transaction.list'))->with(['success' => 'Transaksi berhasil dihapus!']);
+            return redirect(route('transaction.index'))->with(['success' => 'Transaksi berhasil dihapus!']);
         }
     }
 }

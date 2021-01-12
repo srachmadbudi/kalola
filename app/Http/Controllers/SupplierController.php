@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Supplier;
+use App\Business;
 
 class SupplierController extends Controller
 {
@@ -19,7 +20,7 @@ class SupplierController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:50',
             'address' => 'required',
-            'district_id' => 'required',
+            // 'district_id' => 'required',
             'business_id' => 'required',
             'phone_number' => 'required'
         ]);
@@ -31,13 +32,13 @@ class SupplierController extends Controller
     public function edit($id)
     {
         $supplier = Supplier::find($id);
-        return view('business.owner.categoryEdit', compact('supplier'));
+        return view('business.owner.supplierEdit', compact('supplier'));
     }
 
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'district_id' => 'required',
+            // 'district_id' => 'required',
             'address' => 'required',
             'phone_number' => 'required',
             'name' => 'required|string|max:50' . $id
@@ -47,7 +48,7 @@ class SupplierController extends Controller
         $supplier->update([
             'name' => $request->name,
             'address' => $request->address,
-            'district_id' => $request->district_id,
+            // 'district_id' => $request->district_id,
             'phone_number' => $request->phone_number
         ]);
         return redirect(route('supplier.index'))->with(['success' => 'Data Supplier Diperbaharui!']);

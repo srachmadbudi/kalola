@@ -8,7 +8,7 @@
 <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{ route('transaction.list') }}">Daftar Transaksi</a></li>
+        <li class="breadcrumb-item active"><a href="{{ route('transaction.index') }}">Daftar Transaksi</a></li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -73,7 +73,7 @@
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
 
-                            <form action="{{ route('transaction.list') }}" method="get">
+                            <form action="{{ route('transaction.index') }}" method="get">
                                 <div class="input-group mb-3 col-md-3 float-right">
                                     <input type="text" name="q" class="form-control" placeholder="Cari..." value="{{ request()->q }}">
                                     <div class="input-group-append">

@@ -21,12 +21,12 @@
         @if ( Auth::user()->role_id == 2 )
         <li class="nav-title">OWNER {{ Auth::user()->business->name ?? '' }}</li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('category.index') }}">
                 <i class="nav-icon icon-drop"></i> Kategori Produk
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('product.index') }}">
                 <i class="nav-icon icon-drop"></i> Produk
             </a>
         </li>
@@ -36,14 +36,14 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('transaction.list') }}">
+            <a class="nav-link" href="{{ route('transaction.index') }}">
                 <i class="nav-icon icon-basket-loaded"></i> Transaksi
             </a>
         </li>
         
         <li class="nav-title">Master Data</li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('asset.index') }}">
                 <i class="nav-icon icon-puzzle"></i> Aset
             </a>
         </li>
@@ -53,12 +53,12 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('debt.index') }}">
                 <i class="nav-icon icon-puzzle"></i> Hutang
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('supplier.index') }}">
                 <i class="nav-icon icon-puzzle"></i> Supplier
             </a>
         </li>
@@ -67,12 +67,12 @@
         @if ( Auth::user()->role_id == 3 )
         <li class="nav-title">EMPLOYEE {{ Auth::user()->business->name ?? '' }}</li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('category.index') }}">
                 <i class="nav-icon icon-drop"></i> Kategori
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('product.index') }}">
                 <i class="nav-icon icon-drop"></i> Produk
             </a>
         </li>
