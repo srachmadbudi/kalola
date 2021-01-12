@@ -28,7 +28,7 @@ Route::resource('category', 'Business\ProductCategoryController')->except(['crea
 Route::resource('product', 'Business\ProductController')->except(['show']);
 Route::resource('pegawai', 'Business\PegawaiController')->except(['create', 'show']);
 Route::resource('supplier', 'Business\SupplierController')->except(['create', 'show']);
-Route::resource('capital', 'CapitalController');
+Route::resource('modal', 'ModalController');
 Route::resource('asset', 'AssetController');
 Route::resource('debt', 'DebtController');
 Route::get('/get/cities', 'Business\CustomerController@getCity')->name('get-city');

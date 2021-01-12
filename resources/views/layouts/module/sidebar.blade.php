@@ -48,11 +48,6 @@
                 <i class="nav-icon icon-user"></i> Pegawai
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="nav-icon icon-user"></i> Pelanggan
-            </a>
-        </li>
         
         <li class="nav-title">Master Data</li>
         <li class="nav-item">
@@ -61,7 +56,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('capital.index') }}">
+            <a class="nav-link" href="{{ route('modal.index') }}">
                 <i class="nav-icon icon-puzzle"></i> Modal
             </a>
         </li>
